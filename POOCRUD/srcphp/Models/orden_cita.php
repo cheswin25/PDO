@@ -15,7 +15,7 @@ public function mostrarOrden(){
     $TableOrden = new table();
     $allOrden = $TableOrden->query("
 
-    SELECT
+     SELECT
     CONCAT(p.nombre, ' ', p.apellido_paterno) AS nombre_cliente,
     oc.producto,
     oc.problema,
@@ -28,13 +28,13 @@ FROM
 UNION
 
 SELECT
-    CONCAT(of.nombre, ' ', of.apellido_paterno) AS nombre_cliente,
-    of.producto,
-    of.problema,
+    CONCAT(o_f.nombre, ' ', o_f.apellido_paterno) AS nombre_cliente,
+    o_f.producto,
+    o_f.problema,
     'Orden Física' AS tipo_orden
 FROM
-    orden_fisica of
-    INNER JOIN asignacion_fisica af ON of.id_orden_fisica = af.id_orden_fisica
+    orden_fisica o_f
+    INNER JOIN asignacion_fisica af ON o_f.id_orden_fisica = af.id_orden_fisica
     INNER JOIN tecnico t ON af.id_tecnico = t.id_tecnico
     INNER JOIN empleado e ON t.id_empleado = e.id_empleado
     INNER JOIN persona p ON e.id_persona = p.id_persona
